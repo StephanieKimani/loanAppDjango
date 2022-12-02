@@ -166,3 +166,4 @@ JAZZMIN_SETTINGS["show_ui_builder"] = True
 CORS_ORIGIN_WHITELIST =[
     "http://localhost:3000"
 ]
+LOGOUT_REDIRECT_URL = 'http://localhost:3000'

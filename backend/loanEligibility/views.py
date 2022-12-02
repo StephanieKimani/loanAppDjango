@@ -164,18 +164,19 @@ def updateDefault(request,pk,accountNo):
 
    new_dataset=pandas.concat([df_nominal,df_ordinal,df[numerical_features]],axis=1)
    
+   with open('C:\\Users\\reubenmbalanya\Desktop\loanAppDjango\\backend\scale_fit','rb') as f:
+     scale_fit = pickle.load(f)
    X=new_dataset.to_numpy()
-   scale_X = StandardScaler()
-   X=scale_X.fit_transform(X)
+   scaled_data= scale_fit.transform(X)
 
    
-   with open('C:\\Users\\reubenmbalanya\Desktop\loanappdjango\\backend\logisticRegressionLoanModel','rb') as f:
+   with open('C:\\Users\\reubenmbalanya\Desktop\loanAppDjango\\backend\logisticRegressionLoanModel','rb') as f:
     model = pickle.load(f)
 
-   prediction = model.predict(X)
+   prediction = model.predict(scaled_data)
    print("Prediction",prediction[0])
 
-   if prediction==1:
+   if prediction[0]==1:
     default= "Likely to Default"
    else:
     default ="Unlikely to Default"
